@@ -1,0 +1,5 @@
+On windows:
+
+Install C++ compiler from MINGW gcc C++ compiler
+
+type g++ *.cxx -o output on the command prompt

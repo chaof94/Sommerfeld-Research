@@ -1,0 +1,16 @@
+clear all;clc;syms beta_a beta_b beta_c mu_a mu_b mu_c k_x k_y x_p y_p z_p h_1 h_2
+A = [ 1,         -1,           -exp(-1i*beta_b*(h_1 + h_2)),         0; 
+    beta_a*mu_b/(mu_a*beta_b),    1,       -1*exp(-1i*beta_b*(h_1 + h_2)),      0; ...
+      0,    -exp(-1i*beta_b*(h_1 + h_2)),        -1,                 1;...
+      0,  -1*exp(-1i*beta_b*(h_1 + h_2)),   1,          beta_c*mu_b/(mu_c*beta_b)];
+c = -1i*mu_b/2*exp(-1j*(k_x*x_p + k_y*y_p))/beta_b;
+B = [exp(-1i*beta_b*(h_1 + z_p));...
+     exp(-1i*beta_b*(h_1 + z_p));...
+     exp(-1i*beta_b*(h_2 - z_p));...
+     exp(-1i*beta_b*(h_2 - z_p))];
+X = A\B;
+simplify(X)
+% clc
+pretty(X)
+X(2)
+latex(X(2))

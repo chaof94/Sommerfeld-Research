@@ -1,0 +1,20 @@
+The effective permittivity of a 2DEG interms of its adjacent layers can be expressed as:
+
+eps_eff(k) = [eps_2 + eps_1 *coth (kd)/2]/2
+
+where eps_1 and eps_2 are the relative permittivities of the lower and upper layers respectively. 
+d is the distance from the gate
+k is the wavenumber
+
+[1]. @ARTICLE{5692931, 
+author={M. Shur}, 
+journal={Electronics Letters}, 
+title={Plasma wave terahertz electronics}, 
+year={2010}, 
+volume={46}, 
+number={26}, 
+pages={s18-s21}, 
+keywords={electron density;field effect transistors;plasma devices;terahertz wave detectors;2D arrays;3D arrays;THz radiation detection;electron density;grating-gate devices;oscillation frequency;plasma wave THz detectors;plasma wave electronics devices;plasma wave excitation;plasma wave terahertz electronics;plasmonic FET;plasmonic crystals;short channel devices}, 
+doi={10.1049/el.2010.8457}, 
+ISSN={0013-5194}, 
+month={December},}

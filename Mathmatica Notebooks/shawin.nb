@@ -1,0 +1,422 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16320,        412]
+NotebookOptionsPosition[     16072,        399]
+NotebookOutlinePosition[     16419,        414]
+CellTagsIndexPosition[     16376,        411]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"List", " ", "of", " ", "physcal", " ", "constants"}], "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", 
+     RowBox[{"\[Equal]", 
+      RowBox[{"c0", "-", 
+       RowBox[{
+       "Speed", " ", "of", " ", "light", " ", "in", " ", "vacuum", " ", "f"}],
+        "-", 
+       RowBox[{"operating", " ", "frequency", " ", "lam"}], "-", 
+       RowBox[{"wavelength", " ", "k0"}], "-", "free", "-", 
+       RowBox[{"space", " ", "wavenumber", " ", "tand"}], "-", 
+       RowBox[{"dielectric", " ", "loss", " ", "er"}], "-", 
+       RowBox[{
+       "relative", " ", "permittivity", " ", "of", " ", "slab", " ", "d"}], 
+       "-", 
+       RowBox[{"thickness", " ", "of", " ", "slab", " ", "k1"}], "-", 
+       RowBox[{"wavenumber", " ", "in", " ", "slab"}]}]}], "===", "===", "===",
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", 
+     "OtherVariables", "===", "===", "===", "===", "===", "===", "===", "===",
+      "===", "===", "===", "===", 
+     RowBox[{"\[Equal]", 
+      RowBox[{"numZEROS", "-", 
+       RowBox[{
+       "number", " ", "of", " ", "zero", " ", "locations", " ", "of", " ", 
+        "the", " ", "denominator", " ", "in", " ", "the", " ", "integrand", 
+        " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"i", ".", "e", ".", "number"}], " ", "of", " ", "zeros", 
+          " ", "of", " ", "DTM"}], ")"}], " ", "orderOfTS"}], "-", 
+       RowBox[{
+       "order", " ", "of", " ", "the", " ", "Taylor", " ", "series", " ", 
+        "used", " ", "correctZEROS"}], "-", 
+       RowBox[{
+       "this", " ", "is", " ", "used", " ", "inside", " ", "of", " ", "a", 
+        " ", "loop", " ", "to", " ", "count", " ", "the", " ", "number", " ", 
+        "of", " ", "correct", " ", "zeros", " ", "found", " ", "by", " ", 
+        "the", " ", "algorithm"}]}]}]}], ",", 
+    RowBox[{
+     RowBox[{
+     "when", " ", "variable", " ", "is", " ", "equal", " ", "to", " ", 
+      "numZEROS", " ", "then", " ", "this", " ", "means", " ", "that", " ", 
+      "all", " ", "roots", " ", "where", " ", "found", " ", "zeroLIST"}], "-", 
+     RowBox[{
+     "list", " ", "of", " ", "zeros", " ", "that", " ", "contains", " ", 
+      "the", " ", "zeros", " ", "of", " ", "the", " ", "Taylor", " ", 
+      "series", " ", "that", " ", "correspond", " ", "to", " ", "the", " ", 
+      "proper", " ", "surface", " ", "wave", " ", "poles", " ", "testROOTS"}],
+      "-", 
+     RowBox[{"a", " ", "list", " ", "of", " ", "length", " ", "orderOfTS"}]}],
+     ",", 
+    RowBox[{
+    "it", " ", "contains", " ", "roots", " ", "taken", " ", "from", " ", 
+     "the", " ", "zeros", " ", "of", " ", "the", " ", "truncated", " ", 
+     "Taylor", " ", "polynomial", " ", "which", " ", "include", " ", "the", 
+     " ", "effects", " ", "of", " ", "all", " ", "modes"}], ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "these", " ", "roots", " ", "will", " ", "be", " ", "tested", " ", "to",
+        " ", "see", " ", "which", " ", "ones", " ", "correspond", " ", "to", 
+       " ", "the", " ", "surface", " ", "wave", " ", "poles"}], "===", "===", 
+      "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", 
+      RowBox[{"\[Equal]", 
+       RowBox[{"Built", "-", 
+        RowBox[{"in", " ", "Mathematica", " ", "subroutines"}]}]}], "===", "===",
+       "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", 
+      RowBox[{"\[Equal]", 
+       RowBox[{
+        RowBox[{"Sqrt", "[", "]"}], "-", 
+        RowBox[{
+        "takes", " ", "the", " ", "square", " ", "root", " ", "of", " ", 
+         "its", " ", "argument", " ", 
+         RowBox[{"Floor", "[", "]"}]}], "-", 
+        RowBox[{
+        "truncates", " ", "the", " ", "decimal", " ", "portion", " ", "of", 
+         " ", "a", " ", "real", " ", "number", " ", 
+         RowBox[{"Re", "[", "]"}]}], "-", 
+        RowBox[{
+        "takes", " ", "the", " ", "real", " ", "part", " ", "of", " ", "a", 
+         " ", "complex", " ", "number", " ", 
+         RowBox[{"Im", "[", "]"}]}], "-", 
+        RowBox[{
+        "takes", " ", "the", " ", "imaginary", " ", "part", " ", "of", " ", 
+         "a", " ", "complex", " ", "number", " ", 
+         RowBox[{"Abs", "[", "]"}]}], "-", 
+        RowBox[{
+        "takes", " ", "the", " ", "absolute", " ", "values", " ", "of", " ", 
+         "a", " ", "complex", " ", "number", " ", 
+         RowBox[{"NRoot", "[", "]"}]}], "-", 
+        RowBox[{
+        "numerically", " ", "finds", " ", "roots", " ", "of", " ", "a", " ", 
+         "polynomial", "\[IndentingNewLine]", 
+         RowBox[{"FindRoot", "[", "]"}]}], "-", 
+        RowBox[{
+        "numerically", " ", "finds", " ", "root", " ", "of", " ", "a", " ", 
+         "user", " ", "defined", " ", "function"}]}]}], "\n", "===", "===", "===",
+       "===", "===", "===", "===", "===", "===", "===", "===", "==="}], "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Mathematica", " ", "Constants"}], "\n", "===", "===", "===", "===",
+        "===", "===", "===", "===", "===", "===", "===", "==="}], "=", 
+      RowBox[{
+       RowBox[{"Pi", "-", "pi"}], "=", 
+       RowBox[{
+        RowBox[{"3.1415459045", "\n", "I"}], "-", 
+        RowBox[{"square", " ", "root", " ", "of"}], "-", "1"}]}]}]}]}], "\n", 
+   "*)"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Subroutine", " ", "used", " ", "to", " ", "evaluate", " ", "the", " ", 
+    "mode", " ", "function"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"DTM", "[", 
+     RowBox[{"d_", ",", "er_", ",", "k0_", ",", "v_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "D", "}"}], ",", 
+      RowBox[{
+       RowBox[{"D", "=", 
+        RowBox[{
+         RowBox[{"er", "*", "v", "*", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"d", "*", "k0"}], ")"}], "\:02c62", "*", 
+              RowBox[{"(", 
+               RowBox[{"er", "-", "1"}], ")"}]}], "-", "v\:02c62"}], "]"}], 
+           "]"}]}], "-", 
+         RowBox[{
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"d", "*", "k0"}], ")"}], "\:02c62", "*", 
+             RowBox[{"(", 
+              RowBox[{"er", "-", "1"}], ")"}]}], "-", "v\:02c62"}], "]"}], 
+          "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"d", "*", "k0"}], ")"}], "\:02c62", "*", 
+              RowBox[{"(", 
+               RowBox[{"er", "-", "1"}], ")"}]}], "-", "v\:02c62"}], "]"}], 
+           "]"}]}]}]}], ";", "\[IndentingNewLine]", "D"}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"define", " ", "constants"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"c0", "=", 
+     RowBox[{"2.997924", "*", "10", "\:02c68"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"f", "=", 
+     RowBox[{"5", "*", "10", "\:02c69"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"lam", "=", 
+     RowBox[{"c0", "/", "f"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"k0", "=", 
+     RowBox[{"2", " ", 
+      RowBox[{"Pi", "/", "lam"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"tand", "=", "0.0001"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"er", "=", 
+     RowBox[{"9.8", " ", 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"I", " ", "tand"}]}], ")"}]}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"d", "=", "lam"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"k1", "=", 
+     RowBox[{
+      RowBox[{"Sqrt", "[", "er", "]"}], " ", "k0"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"numZEROS", "=", 
+     RowBox[{
+      RowBox[{"Floor", "[", 
+       RowBox[{"d", " ", "k0", " ", 
+        RowBox[{
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{"Re", "[", "er", "]"}], "-", "1"}], "]"}], "/", "Pi"}]}], 
+       "]"}], "+", "1"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"orderOfTS", "=", "0"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"correctZEROS", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "while", " ", "the", " ", "number", " ", "of", " ", "correct", " ", 
+      "zeros", " ", "found", " ", "by", " ", "the", " ", "algorithm", " ", 
+      "is", " ", "less", " ", "than", " ", "the", " ", "number", " ", "of", 
+      " ", "zeros", " ", "of", " ", "DTM", " ", "due", " ", "to", " ", 
+      "proper", " ", "surface", " ", "wave", " ", "poles"}], ",", 
+     RowBox[{"then", " ", "keep", " ", "looking"}]}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"While", "[", 
+     RowBox[{
+      RowBox[{"correctZEROS", "<", "numZEROS"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+         "reset", " ", "the", " ", "number", " ", "of", " ", "correct", " ", 
+          "zeros", " ", "found"}], "&"}], " ", "list", " ", "of", " ", 
+        "zeros"}], "*)"}], 
+      RowBox[{
+       RowBox[{"correctZEROS", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"zeroLIST", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "numZEROS"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{
+         "increase", " ", "the", " ", "order", " ", "of", " ", "the", " ", 
+          "Taylor", " ", "series"}], ",", 
+         RowBox[{
+         "and", " ", "insure", " ", "that", " ", "the", " ", "order", " ", 
+          "of", " ", "the", " ", "Taylor", " ", "series", " ", "taken", " ", 
+          "will", " ", "be", " ", "greater", " ", "than", " ", "the", " ", 
+          "number", " ", "of", " ", "surface", " ", "wave", " ", "poles", " ",
+           "that", " ", "need", " ", "to", " ", "be", " ", "found"}]}], 
+        "*)"}], 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"orderOfTS", "++"}], ")"}], "<", "numZEROS"}], ",", 
+         RowBox[{"orderOfTS", "=", "numZEROS"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "get", " ", "Taylor", " ", "series", " ", "of", " ", "DTM", " ", 
+         "and", " ", "find", " ", "all", " ", "zeros", " ", "of", " ", "the", 
+         " ", "series"}], "*)"}], 
+       RowBox[{"testROOTS", "=", 
+        RowBox[{"NRoots", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Normal", "[", 
+            RowBox[{"Series", "[", 
+             RowBox[{
+              RowBox[{"DTM", "[", 
+               RowBox[{"d", ",", "er", ",", "k0", ",", "v"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"v", ",", "0", ",", "orderOfTS"}], "}"}]}], "]"}], 
+            "]"}], "\[Equal]", "0"}], ",", "v"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "for", " ", "each", " ", "of", " ", "the", " ", "test", " ", "roots", 
+         " ", "found", " ", "from", " ", "the", " ", "truncated", " ", 
+         "Taylor", " ", "series"}], "*)"}], 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"q", "=", "1"}], ",", 
+         RowBox[{"q", "\[LessEqual]", 
+          RowBox[{"Length", "[", "testROOTS", "]"}]}], ",", 
+         RowBox[{"q", "++"}], ",", 
+         RowBox[{"(*", 
+          RowBox[{"gets", " ", "the", " ", "next", " ", "test", " ", "root"}],
+           "*)"}], 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"orderOfTS", ">", "1"}], ",", 
+            RowBox[{"vr", "=", 
+             RowBox[{
+              RowBox[{"testROOTS", "[", 
+               RowBox[{"[", "q", "]"}], "]"}], "[", 
+              RowBox[{"[", "2", "]"}], "]"}]}], ",", 
+            RowBox[{"vr", "=", 
+             RowBox[{"testROOTS", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "evaluate", " ", "DTM", " ", "for", " ", "test", " ", "root"}], 
+           "*)"}], 
+          RowBox[{"test", "=", 
+           RowBox[{"DTM", "[", 
+            RowBox[{"d", ",", "er", ",", "k0", ",", "vr"}], "]"}]}], ";", 
+          "\n", 
+          RowBox[{"(*", 
+           RowBox[{
+           "is", " ", "the", " ", "test", " ", "close", " ", "enough", " ", 
+            "to", " ", "zero", " ", "and", " ", "is", " ", "this", " ", "a", 
+            " ", "proper", " ", 
+            RowBox[{"SWP", "?"}]}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"Abs", "[", "test", "]"}], "\[LessEqual]", "1"}], "&&", 
+             RowBox[{
+              RowBox[{"Re", "[", "vr", "]"}], "\[GreaterEqual]", "0"}], "&&", 
+             RowBox[{
+              RowBox[{"Re", "[", "vr", "]"}], "\[LessEqual]", 
+              RowBox[{"d", " ", "k0", " ", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"Re", "[", "er", "]"}], "-", "1"}], "]"}]}]}], "&&", 
+             RowBox[{
+              RowBox[{"Im", "[", "vr", "]"}], "\[LessEqual]", "0"}]}], ",", 
+            RowBox[{"(*", 
+             RowBox[{
+             "then", " ", "increment", " ", "the", " ", "number", " ", "of", 
+              " ", "correct", " ", "zeros", " ", "that", " ", "have", " ", 
+              "been", " ", "found"}], "*)"}], 
+            RowBox[{
+             RowBox[{"correctZEROS", "++"}], ";", "\[IndentingNewLine]", 
+             RowBox[{"(*", 
+              RowBox[{
+              "add", " ", "the", " ", "test", " ", "root", " ", "to", " ", 
+               "the", " ", "list", " ", "of", " ", "correct", " ", "zeros", 
+               " ", "found"}], "*)"}], 
+             RowBox[{
+              RowBox[{"zeroLIST", "[", 
+               RowBox[{"[", "correctZEROS", "]"}], "]"}], "=", "vr"}]}]}], 
+           "]"}], ";"}]}], "\n", "]"}]}]}], "\n", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "use", " ", "the", " ", "inital", " ", "guess", " ", "for", " ", "each", 
+     " ", "root", " ", "to", " ", "find", " ", "the", " ", "exact", " ", 
+     "root"}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"exactZEROS", "=", 
+     RowBox[{"FindRoot", "[", 
+      RowBox[{
+       RowBox[{"DTM", "[", 
+        RowBox[{"d", ",", "er", ",", "k0", ",", "v"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"v", ",", "zeroLIST"}], "}"}], ",", 
+       RowBox[{"AccuracyGoal", "\[Rule]", "10"}]}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"exactZEROS", "=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"exactZEROS", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "/", 
+          RowBox[{"(", 
+           RowBox[{"d", " ", "k0"}], ")"}]}], ")"}], "\:02c62"}], "+", "1"}], 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Number of zeros is \>\"", ",", "numZEROS", ",", "\"\<.\>\""}], "]"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<Order of the Taylor series taken is \>\"", ",", "orderOfTS", ",", 
+      "\"\<.\>\""}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Zero locations are: \>\"", ",", "exactZEROS"}], "]"}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.6628649382108803`*^9, 3.662864976360611*^9}}]
+},
+WindowSize->{831, 668},
+WindowMargins->{{Automatic, 100}, {Automatic, 45}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 15510, 377, 1492, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
