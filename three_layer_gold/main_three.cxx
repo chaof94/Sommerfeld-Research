@@ -149,7 +149,7 @@ int main(void)
     st2 = fopen("Ey.dat","w");
     st3 = fopen("Ez.dat","w");
 
-    res       = 50;
+    res       = 100;
     lambda    = 1.0;
     thickness = 1;
 
@@ -166,7 +166,7 @@ int main(void)
 
     //Dipole source location (xp, yp, zp) and orientation (alpha_x, alpha_y, alphz_z)
     xp =   0;
-    yp =  0;
+    yp =  0.0;
     zp =  -0.5;
 
     //Dipole orientation
@@ -182,9 +182,9 @@ int main(void)
     epsilon_0 = 1.0;
 
     //epsilon in each layer
-    epsilon[0] = 1.0;
-    epsilon[1] = 1.0;
-    epsilon[2] = 1.0;
+    epsilon[0] = complex(1,0);
+    epsilon[1] = complex(10.9,0);
+    epsilon[2] = complex(1,0);
 
     gettimeofday(&tv1, NULL);
 

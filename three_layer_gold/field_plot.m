@@ -14,7 +14,7 @@ z = data_ex(:,2);
 
 ex_realpart = data_ex(:,3);
 ex_imagpart = data_ex(:,4);
-y_ex = ex_realpart+1i*ex_imagpart;
+x_ex = ex_realpart+1i*ex_imagpart;
 % y_ex = reshape(y_ex,[res,res]);
 
 ey_realpart = data_ey(:,3);
@@ -24,7 +24,7 @@ y_ey = ey_realpart+1i*ey_imagpart;
 
 ez_realpart = data_ez(:,3);
 ez_imagpart = data_ez(:,4);
-y_ez = ez_realpart+1i*ez_imagpart;
+z_ez = ez_realpart+1i*ez_imagpart;
 % y_ez = reshape(y_ez,[res,res]);
 
 %For better figure interpolate data by res2 resolution
@@ -48,12 +48,12 @@ set(gca,...
     'box','on',...
     'FontName','times new roman',...
     'FontSize',12);
-subplot(211)
-trisurf(tri, x, z, real(y_ex));
+% subplot(211)
+trisurf(tri, x, z, real(x_ex));
 title('$\Re (E_x)$','interpreter','latex');
 % optional, could help make the plot look nicer
 shading interp
-colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' Spectral
+colormap(brewermap([],'Spectral')) %RdYlBu 'RdYlBu' Spectral
 % colormap('viridis')
 % colormap(cubehelix)
 colorbar
@@ -61,30 +61,13 @@ axis equal
 % axis xy
 hold on
 
-line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
+line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
 view([0 90])
+matlab2tikz('filename',sprintf('Ex_x_re.tex'),'showInfo', false)
+export_fig Ex_x_re '-pdf' '-png' -nocrop -r300 -native -painters -transparent -q101
 
 
-
-subplot(212)
-trisurf(tri, x, z, imag(y_ex));
-title('$\Im (E_x)$','interpreter','latex');
-% optional, could help make the plot look nicer
-shading interp
-colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' Spectral
-% colormap('viridis')
-colorbar
-axis equal
-% axis xy
-hold on
-
-line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
-view([0 90])
-
-
-%% Ey
 figure(2)
 box on
 set(gcf,'color','white');
@@ -94,39 +77,66 @@ set(gca,...
     'box','on',...
     'FontName','times new roman',...
     'FontSize',12);
-subplot(211)
-trisurf(tri, x, z, real(y_ey));
-title('$\Re (E_y)$','interpreter','latex');
+trisurf(tri, x, z, imag(x_ex));
+title('$\Im (E_x)$','interpreter','latex');
 % optional, could help make the plot look nicer
 shading interp
-colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' RdYlBu
+colormap(brewermap([],'Spectral')) %RdYlBu 'RdYlBu' Spectral
 % colormap('viridis')
 colorbar
 axis equal
 % axis xy
 hold on
 
-line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
+line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
 view([0 90])
+matlab2tikz('filename',sprintf('Ex_x_im.tex'),'showInfo', false)
+export_fig Ex_x_im '-pdf' '-png' -nocrop -r300 -native -painters -transparent -q101
 
-
-
-subplot(212)
-trisurf(tri, x, z, imag(y_ey));
-title('$\Im (E_y)$','interpreter','latex');
-% optional, could help make the plot look nicer
-shading interp
-colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' RdYlBu
+% %% Ey
+% figure(2)
+% box on
+% set(gcf,'color','white');
+% set(groot,'defaulttextinterpreter','latex');
+% set(gca,'TickLabelInterpreter', 'latex');
+% set(gca,...
+%     'box','on',...
+%     'FontName','times new roman',...
+%     'FontSize',12);
+% subplot(211)
+% trisurf(tri, x, z, abs(y_ey));
+% title('$\Re (E_y)$','interpreter','latex');
+% % optional, could help make the plot look nicer
+% shading interp
+% colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' RdYlBu
 % colormap('viridis')
-colorbar
-axis equal
-% axis xy
-hold on
-
-line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
-view([0 90])
+% colorbar
+% axis equal
+% % axis xy
+% hold on
+% 
+% line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+% line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
+% view([0 90])
+% 
+% 
+% 
+% subplot(212)
+% trisurf(tri, x, z, angle(y_ey));
+% title('$\Im (E_y)$','interpreter','latex');
+% % optional, could help make the plot look nicer
+% shading interp
+% colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' RdYlBu
+% colormap('viridis')
+% colorbar
+% axis equal
+% % axis xy
+% hold on
+% 
+% line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+% % line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
+% view([0 90])
 
 
 
@@ -140,40 +150,53 @@ set(gca,...
     'box','on',...
     'FontName','times new roman',...
     'FontSize',12);
-subplot(211)
-trisurf(tri, x, z, real(y_ez));
+% subplot(211)
+trisurf(tri, x, z, real(z_ez));
 title('$\Re (E_z)$','interpreter','latex');
 % optional, could help make the plot look nicer
 shading interp
-colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' RdYlBu
+colormap(brewermap([],'Spectral')) %RdYlBu 'RdYlBu' Spectral
+% colorbar
 % colormap('viridis')
 axis equal
 % axis xy
 hold on
 
-line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
+line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+% line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
 view([0 90])
-colorbar
+% colorbar
+matlab2tikz('filename',sprintf('Ez_z_re.tex'),'showInfo', false)
+export_fig Ez_z_re '-pdf' '-png' -nocrop -r300 -native -painters -transparent -q101
 
-subplot(212)
-trisurf(tri, x, z, imag(y_ez));
+% subplot(212)
+figure(4)
+box on
+set(gcf,'color','white');
+set(groot,'defaulttextinterpreter','latex');
+set(gca,'TickLabelInterpreter', 'latex');
+set(gca,...
+    'box','on',...
+    'FontName','times new roman',...
+    'FontSize',12);
+trisurf(tri, x, z, imag(z_ez));
 title('$\Im (E_z)$','interpreter','latex');
 % optional, could help make the plot look nicer
 shading interp
-% colormap(brewermap([],'RdYlBu')) %RdYlBu 'RdYlBu' RdYlBu
+colormap(brewermap([],'Spectral')) %RdYlBu 'RdYlBu' RdYlBu
 % colormap('viridis')
 axis equal
 % axis xy
 hold on
 
-line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
+line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+% line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
 view([0 90])
 colorbar
 % myaa('publish');
-cleanfigure();
-matlab2tikz('filename',sprintf('Ez_z_dip.tex'),'showInfo', false)
+% cleanfigure();
+matlab2tikz('filename',sprintf('Ez_z_im.tex'),'showInfo', false)
+export_fig Ez_z_im  '-png' -nocrop -r300 -native -painters -transparent -q101
 
 
 %% This is the contour plot
@@ -194,7 +217,7 @@ matlab2tikz('filename',sprintf('Ez_z_dip.tex'),'showInfo', false)
 % 
 % [XI,YI] = meshgrid(Xrange,Yrange);
 % 
-% z = imag(y_ex);
+% z = imag(x_ex);
 % Z = griddata(X,Y,z,XI,YI,'v4');
 % g = contourf(XI,YI,Z,'linecolor','black');
 % axis equal;
@@ -204,8 +227,8 @@ matlab2tikz('filename',sprintf('Ez_z_dip.tex'),'showInfo', false)
 % set(0,'defaulttextinterpreter','latex')
 % set(gca, 'FontName', 'Times New Roman','FontSize',12);
 % hold on
-% line([-5,5],[0,0],[1,1],'linewidth',1.2,'color','black')
-% line([-5,5],[-1,-1],[1,1],'linewidth',1.2,'color','black')
+% line([-5,5],[0,0],[1,1],'linewidth',1.0,'color','black')
+% line([-5,5],[-1,-1],[1,1],'linewidth',1.0,'color','black')
 % xlabel('x');
 
 
